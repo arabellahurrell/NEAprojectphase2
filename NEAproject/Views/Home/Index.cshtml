@@ -1,0 +1,91 @@
+﻿@using NEAproject.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model homemodel
+@{
+    ViewBag.Title = "Big O Notation";
+}
+@{
+
+    //var chart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue).AddTitle("Graphtest").AddSeries(name: "Taste", xValue: new[] {"1", "2","3","4","5"}, yValues: new[] {"1", "2","3","4","5"}).Write();
+}
+<div class="row col-12 col-sm-12 text-center">
+    <h1>@ViewBag.Title</h1>
+
+</div>
+
+@*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "form1" }))
+    {*@
+<form id="form1" method="post">
+    <div class="row">
+        <div class="col-sm-4">
+            please choose the complexity that you want
+        </div>
+        <div class="col-sm-8">
+            @Html.DropDownListFor(m => m.selectcomplexity, homemodel.getcomplexity(), "Please select complexity", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row col-sm-12">
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            please input the value of N that you want
+        </div>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.valueofn, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <input type="submit" value="submit" class="btn btn-primary">
+
+        </div>
+    </div>
+
+    
+</form>
+@*}*@
+
+<div id="chartContainer" style="height: 500px ; width : 100%;"> </div>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+@if (ViewData["Loginsuccessful"]!=null && !string.IsNullOrEmpty(ViewData["Loginsuccessful"].ToString()))
+{
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" area-label="close">
+        <span aria-hidden="true">
+            &times;
+        </span>
+    </button>
+    you have successfully logged in!
+</div>
+}
+@section header {
+
+
+    @if (ViewBag.datapointlist != null)
+    {
+    <script>
+ window.onload = function(){
+     var chart = new CanvasJS.Chart("chartContainer",{
+         animationEnabled: true,
+         theme: "light2",title: {
+             text: "Graph"
+         }, data: [{
+             type: "spline", name:"a", dataPoints: @Html.Raw(ViewBag.datapointlist)
+         }]
+     });
+     chart.render();}
+
+    </script>
+    }
+
+}
+
+@* create slect list in c# with helper function user defined, and needs to *@
+@* place it in the viewbag, and on cshtml page *@
+@* @Html.DropdownListFor(m=>m.selectComplexity, viewbag.nameofviewbagcreated) *@

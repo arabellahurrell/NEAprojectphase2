@@ -1,0 +1,99 @@
+﻿@using NEAproject.Models
+@model homemodel
+@{
+    //Layout = null;
+   ViewBag.Title = "Compare Multiple Lines";
+}
+@{
+
+    //var chart = new Chart(width: 600, height: 400, theme: ChartTheme.Blue).AddTitle("Graphtest").AddSeries(name: "Taste", xValue: new[] {"1", "2","3","4","5"}, yValues: new[] {"1", "2","3","4","5"}).Write();
+}
+
+            <div class="jumbotron">
+                <h1>@ViewBag.Title</h1>
+
+            </div>
+
+            @*@using (Html.BeginForm("Comparison", "Home", FormMethod.Post, new { id = "form1" }))
+                {*@
+<form id="form1" method="post">
+    <div class="row">
+        <div class="col-lg-2">
+            please input the value of N that you want
+        </div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(m => m.valueofn, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <input type="submit" value="submit" class="btn btn-primary">
+        </div>
+    </div>
+
+   
+</form>
+            @*}*@
+
+
+            <div id="chartContainer" style="height: 500px ; width : 100%;"> </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="text-green">
+                        This is the line O(n)
+                    </div>
+                    <div class="text-blue">
+                        This is the line O(n^2)
+                    </div>
+                    <div class="text-red">
+                        This is the line O(2^n)
+                    </div>
+                    <div class="text-black">
+                        This is the line O(logn)
+                    </div>
+                    <div class="text-yellow">
+                        This is the line O(nlogn)
+                    </div>
+                </div>
+            </div>
+       
+
+    
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    @*adds script for canvas js*@
+    <script>
+    window.onload = function(){
+              var chart = new CanvasJS.Chart("chartContainer",{
+                  animationEnabled: true,
+                  theme: "light2",title: {
+                      text: "Graph"
+                  }, data: [{
+                      name : "O(n)" , type: "spline", name:"c", lineColor: "green", dataPoints: @Html.Raw(ViewBag.datapointlist)
+                  },{
+                          name: "O(n^2)", type: "spline", name: "c", lineColor: "blue", dataPoints: @Html.Raw(ViewBag.datapointlist1)
+                                            },
+                  {
+                      name: "O(2^n)", type: "spline", name: "c", lineColor: "red", dataPoints: @Html.Raw(ViewBag.datapointlist2)
+                                    },
+                  {
+                      name: "O(log(n))", type: "spline", name: "c", lineColor: "black", dataPoints: @Html.Raw(ViewBag.datapointlist3)
+                                                      },
+                  {
+                      name: "O(nlog(n))", type: "spline", name: "c", lineColor: "yellow", dataPoints: @Html.Raw(ViewBag.datapointlist4)
+                                                      }
+                                    ]
+              });
+        chart.render();
+        //write comment same as C#
+          chart = {};
+        }
+    </script>
+
+
+    
+
+
+    
